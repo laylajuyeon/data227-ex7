@@ -14,3 +14,5 @@ st.markdown("**Guided prompts:**")
 st.write("- Filter to one weather type (e.g., `sun`, `rain`)—does the temperature distribution shift?")
 st.write("- Brush a specific year—do extremes cluster in particular periods?")
 st.write("- Compare histogram shape across weather types—what changes most: center, spread, or tails?")
+
+st.altair_chart(month_weather_chart(df),use_container_width=True)

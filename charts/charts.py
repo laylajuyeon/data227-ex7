@@ -107,3 +107,35 @@ def chart_dashboard(df: pd.DataFrame) -> alt.Chart:
     )
 
     return alt.vconcat(line, hist).resolve_scale(color="independent")
+
+def temp_diff_chart(df: pd.DataFrame) -> alt.Chart:
+    return (
+        alt.Chart(df)
+        .transform_calculate("temp_diff=datum.temp_max-datum.temp_min")
+        .mark_line(point=True)
+        .encode(
+            x=alt.X("date:T", title="Date"),
+            y=alt.Y("temp_diffn:Q", title="Daily Difference in Temperature (°C)"),
+            tooltip=[
+                alt.Tooltip("date:T",title='Date'),
+                alt.Tooltip("temp_diff:Q",title='Difference in Temperature')
+            ],
+        )
+        .properties(height=320)
+    )
+
+def month_weather_chart(df: pd.DataFrame) -> alt.Chart:
+    
+    selection = alt.selection_point(fields='year')
+
+    year = alt.Chart(df).transform_calculate(year="year(datum.date)").mark_bar().encode(
+    x=alt.X('year:N', title='Year'),
+    y='count()',
+    color=alt.condition(selection,'weather:N',alt.value(1),alt.value(0.1))).add_params(selection)
+
+    month = alt.Chart(df).mark_bar().encode(
+    x=alt.X('month(date):N', title='Month'),
+    y='count()',
+    color=alt.Color('weather:N')).transform_filter(selection)
+
+    return alt.hconcat(year, month)
