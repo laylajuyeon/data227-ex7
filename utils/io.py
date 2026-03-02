@@ -10,3 +10,4 @@ def load_weather() -> pd.DataFrame:
     df["month"] = df["date"].dt.month
     df["month_name"] = df["date"].dt.strftime("%b")
     return df
+
