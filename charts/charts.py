@@ -111,7 +111,7 @@ def chart_dashboard(df: pd.DataFrame) -> alt.Chart:
 def temp_diff_chart(df: pd.DataFrame) -> alt.Chart:
     return (
         alt.Chart(df)
-        .transform_calculate("temp_diff=datum.temp_max-datum.temp_min")
+        .transform_calculate(temp_diff="datum.temp_max-datum.temp_min")
         .mark_line(point=True)
         .encode(
             x=alt.X("date:T", title="Date"),
