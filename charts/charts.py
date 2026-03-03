@@ -115,7 +115,7 @@ def temp_diff_chart(df: pd.DataFrame) -> alt.Chart:
         .mark_line(point=True)
         .encode(
             x=alt.X("date:T", title="Date"),
-            y=alt.Y("temp_diffn:Q", title="Daily Difference in Temperature (°C)"),
+            y=alt.Y("temp_diff:Q", title="Daily Difference in Temperature (°C)"),
             tooltip=[
                 alt.Tooltip("date:T",title='Date'),
                 alt.Tooltip("temp_diff:Q",title='Difference in Temperature')
