@@ -39,6 +39,6 @@ st.write("We wish to test a plausible explanation: are the warmest days also the
 st.altair_chart(chart_explain_precip_vs_temp(df), use_container_width=True)
 st.caption("Takeaway: The relationship is noisy — precipitation alone does not explain extreme heat, motivating more fine-grained exploration.")
 
-st.head("5) Daily Difference in Temperature over Time")
+st.header("5) Daily Difference in Temperature over Time")
 st.write("Is the difference in temperature (max-min) different across time?")
 st.altair_chart(temp_diff_chart(df), use_container_width=True)
