@@ -112,7 +112,7 @@ def temp_diff_chart(df: pd.DataFrame) -> alt.Chart:
     return (
         alt.Chart(df)
         .transform_calculate(temp_diff="datum.temp_max-datum.temp_min")
-        .mark_line(point=True)
+        .mark_line()
         .encode(
             x=alt.X("date:T", title="Date"),
             y=alt.Y("temp_diff:Q", title="Daily Difference in Temperature (°C)"),
@@ -126,7 +126,7 @@ def temp_diff_chart(df: pd.DataFrame) -> alt.Chart:
 
 def month_weather_chart(df: pd.DataFrame) -> alt.Chart:
     
-    selection = alt.selection_point(fields='year')
+    selection = alt.selection_point(fields=['year'])
 
     year = alt.Chart(df).transform_calculate(year="year(datum.date)").mark_bar().encode(
     x=alt.X('year:N', title='Year'),
