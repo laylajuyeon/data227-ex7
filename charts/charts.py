@@ -131,8 +131,9 @@ def month_weather_chart(df: pd.DataFrame) -> alt.Chart:
     year = alt.Chart(df).transform_calculate(year="year(datum.date)").mark_bar().encode(
     x=alt.X('year:N', title='Year'),
     y='count()',
-    color=alt.condition(selection,alt.value(1),alt.value(0.1))).add_params(selection)
-
+    color = alt.Color('weather:N'),
+    opacity=alt.condition(selection,alt.value(1),alt.value(0.1))).add_params(selection)
+    
     month = alt.Chart(df).mark_bar().encode(
     x=alt.X('month(date):N', title='Month'),
     y='count()',
